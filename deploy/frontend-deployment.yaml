@@ -1,0 +1,26 @@
+---
+apiVersion: apps/v1 #  for k8s versions before 1.9.0 use apps/v1beta2  and before 1.8.0 use extensions/v1beta1
+kind: Deployment
+metadata:
+  name: service2
+
+spec:
+  selector:
+    matchLabels:
+      app: service2
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: service2
+    spec:
+      containers:
+        - name: service2
+          image: 264144530906.dkr.ecr.us-east-1.amazonaws.com/service-2:latest
+          # update image value with the image URI of the container registry
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          ports:
+            - containerPort: 5000
