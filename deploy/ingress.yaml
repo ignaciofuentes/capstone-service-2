@@ -8,6 +8,7 @@ metadata:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/tags: Environment=dev,Team=test
     alb.ingress.kubernetes.io/group.name: capstone
+    alb.ingress.kubernetes.io/group.order: "1"
 spec:
   rules:
     - http:
