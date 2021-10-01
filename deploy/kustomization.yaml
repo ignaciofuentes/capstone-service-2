@@ -6,7 +6,7 @@ resources:
 - ingress.yaml
 images:
 - name: 264144530906.dkr.ecr.us-east-1.amazonaws.com/service-2
-  newTag: b9721544d27b853c844fa4a0b53e34f08121309c
+  newTag: 3ab6e5ee124e97e8fb8cbf247736639199ac3206
 - name: service2
   newName: service2
   newTag: latest
