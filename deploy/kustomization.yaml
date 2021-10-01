@@ -1,15 +1,12 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - frontend-deployment.yaml
-  - frontend-service.yaml
-  - ingress.yaml
+- frontend-deployment.yaml
+- frontend-service.yaml
+- ingress.yaml
 images:
-  - name: 264144530906.dkr.ecr.us-east-1.amazonaws.com/service-2
-    newTag: latest
-  - name: service2
-    newName: service2
-    newTag: latest
-  - name: service2
-    newName: service2
-    newTag: new
+- name: 264144530906.dkr.ecr.us-east-1.amazonaws.com/service-2
+  newTag: 3cd3bcf18c888b936c4484c2663ee652af759f83
+- name: service2
+  newName: service2
+  newTag: latest
