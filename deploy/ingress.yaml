@@ -14,7 +14,7 @@ spec:
     - http:
         paths:
           - path: /service2
-            pathType: Exact
+            pathType: prefix
             backend:
               service:
                 name: service2
