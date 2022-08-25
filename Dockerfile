@@ -6,7 +6,7 @@ ENV ASPNETCORE_URLS=http://+:80
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0-focal AS build
 WORKDIR /src
-COPY ["capstone-service-2.csproj", "./"]
+COPY ["capstone-service-2/capstone-service-2.csproj", "./"]
 RUN dotnet restore "capstone-service-2.csproj"
 COPY . .
 WORKDIR "/src/."
