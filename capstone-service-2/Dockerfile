@@ -1,26 +1,17 @@
-FROM mcr.microsoft.com/dotnet/aspnet:6.0-focal AS base
+# syntax=docker/dockerfile:1
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
 WORKDIR /app
-EXPOSE 5000
-
-ENV ASPNETCORE_URLS=http://+:5000
-
-# Creates a non-root user with an explicit UID and adds permission to access the /app folder
-# For more info, please refer to https://aka.ms/vscode-docker-dotnet-configure-containers
-RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /app
-USER appuser
-
-FROM mcr.microsoft.com/dotnet/sdk:6.0-focal AS build
-WORKDIR /src
-COPY ["capstone-service-2.csproj", "./"]
-RUN dotnet restore "capstone-service-2.csproj"
+    
+# Copy csproj and restore as distinct layers
+COPY *.csproj ./
+RUN dotnet restore
+    
+# Copy everything else and build
 COPY . .
-WORKDIR "/src/."
-RUN dotnet build "capstone-service-2.csproj" -c Release -o /app/build
-
-FROM build AS publish
-RUN dotnet publish "capstone-service-2.csproj" -c Release -o /app/publish
-
-FROM base AS final
+RUN dotnet publish -c Release -o out
+    
+# Build runtime image
+FROM mcr.microsoft.com/dotnet/aspnet:6.0
 WORKDIR /app
-COPY --from=publish /app/publish .
+COPY --from=build-env /app/out .
 ENTRYPOINT ["dotnet", "capstone-service-2.dll"]
